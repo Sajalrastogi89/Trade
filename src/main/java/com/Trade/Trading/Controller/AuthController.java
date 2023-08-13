@@ -1,7 +1,7 @@
 package com.Trade.Trading.Controller;
 
 import com.Trade.Trading.DTO.UserDetailDTO;
-import com.Trade.Trading.Response.UserSignUp;
+import com.Trade.Trading.Utils.UserSignUp;
 import com.Trade.Trading.Service.EmailService;
 import com.Trade.Trading.Service.Registration;
 import org.springframework.web.bind.annotation.*;

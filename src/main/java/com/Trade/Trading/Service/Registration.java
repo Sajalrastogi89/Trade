@@ -1,7 +1,7 @@
 package com.Trade.Trading.Service;
 
 import com.Trade.Trading.DTO.UserDetailDTO;
-import com.Trade.Trading.Response.UserSignUp;
+import com.Trade.Trading.Utils.UserSignUp;
 
 public interface Registration {
     UserSignUp addUser(UserDetailDTO userDetailDTO);

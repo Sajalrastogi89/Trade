@@ -3,11 +3,12 @@ package com.Trade.Trading.Service.Impl;
 import com.Trade.Trading.DTO.UserDetailDTO;
 import com.Trade.Trading.Entity.UserDetail;
 import com.Trade.Trading.Repositories.UserInformation;
-import com.Trade.Trading.Response.UserSignUp;
+import com.Trade.Trading.Utils.UserSignUp;
 import com.Trade.Trading.Service.Registration;
 import net.bytebuddy.utility.RandomString;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 //import static javax.swing.text.rtf.RTFAttributes.BooleanAttribute.True;
 
 @Service
@@ -68,6 +69,7 @@ public class RegistrationImpl implements Registration {
     @Override
     public UserSignUp login(UserDetailDTO userDetailDTO) {
         UserSignUp userSignUp;
+
 UserDetail userDetail=userInformation.findByEmail(userDetailDTO.getEmail());
 if(
         userDetail.getEmail().equals(userDetailDTO.getEmail()) &&
@@ -85,7 +87,16 @@ else{
 }
         return userSignUp;
     }
+    @Transactional
+    public void performUpdateWithTransaction() {
+        try {
+            // Execute the @Modifying query to update the database
+            userInformation.updateOtpExpiration(System.currentTimeMillis()-120000);
 
+            // If the above query method doesn't throw an exception, the transaction will be committed
+        } catch (Exception e) {
+            System.out.println(e);
+        }}
 
     private UserDetail DtoToUser(UserDetailDTO userDetailDTO) {
         return this.modelMapper.map(userDetailDTO,UserDetail.class);
