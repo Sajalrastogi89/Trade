@@ -41,7 +41,11 @@ public class AuthController {
 
          emailService.sendEmail(email,"hello","This is your OTP"+register.generateOTP(email)+"\n"+"It will expire in 10 minutes");
     }
+@PostMapping("/orderId")
+    public UserDetailDTO orderId(@RequestBody UserDetailDTO userDetailDTO){
 
+        return userDetailDTO;
+}
 
 
 
